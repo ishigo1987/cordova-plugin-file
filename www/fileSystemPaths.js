@@ -50,7 +50,6 @@ exports.file = {
     sharedDirectory: null
 };
 
-channel.waitForInitialization('onFileSystemPathsReady');
 channel.onCordovaReady.subscribe(function () {
     function after (paths) {
         for (var k in paths) {
@@ -58,5 +57,6 @@ channel.onCordovaReady.subscribe(function () {
         }
     }
     exec(after, null, 'File', 'requestAllPaths', []);
+    channel.waitForInitialization('onFileSystemPathsReady');
     channel.initializationComplete('onFileSystemPathsReady');
 });
